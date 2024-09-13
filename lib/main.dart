@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:workmanager/workmanager.dart';
 import 'screens/funny_screen.dart';
 import 'screens/list_screen.dart';
 import 'screens/real_time_screen.dart';
 import 'screens/notification_screen.dart';
 import 'widgets/bottom_nav_bar.dart';
+import 'services/notification_service.dart';
 
-void main() => runApp(MyApp());
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) {
+    NotificationService().showNotification(); // Trigger a notification
+    return Future.value(true);
+  });
+}
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Workmanager().initialize(
+    callbackDispatcher,
+    isInDebugMode: true, // Enable this for debugging
+  );
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
