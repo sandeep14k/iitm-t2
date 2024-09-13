@@ -22,21 +22,31 @@ class _FunnyScreenState extends State<FunnyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen size
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(title: Text('Funny Screen')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Image.network(
-            imageUrls[currentIndex],
-            height: 200,
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: changeImage,
-            child: Text('Change Image'),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // Image covers 80% of width and half of the screen height
+            Image.network(
+              imageUrls[currentIndex],
+              width: screenWidth * 0.8,
+              height: screenHeight * 0.5,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(height: 20),
+            // Button in center
+            ElevatedButton(
+              onPressed: changeImage,
+              child: Text('Change Image'),
+            ),
+          ],
+        ),
       ),
     );
   }
