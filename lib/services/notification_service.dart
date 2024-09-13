@@ -45,7 +45,7 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.show(
       0,
       'Test Notification',
-      'This is the notification content.',
+      'This is the notification for iitm task.',
       platformChannelSpecifics,
     );
   }
